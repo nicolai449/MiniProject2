@@ -38,7 +38,7 @@ public class Neighbour implements Comparable<Neighbour>{
 
     @Override
     public int compareTo(Neighbour o) {
-        return Double.compare(this.distance, o.getDistance())
+        return Double.compare(this.distance, o.getDistance());
     }
 
     @Override
