@@ -1,5 +1,5 @@
 
-public class Neighbour implements Comparable<Neighbour> {
+public class Neighbour {
     private final double distance;
     private final Observation label;
 
@@ -21,8 +21,4 @@ public class Neighbour implements Comparable<Neighbour> {
         return label;
     }
 
-    @Override
-    public int compareTo(Neighbour neighbour) {
-        return 0;
-    }
 }
