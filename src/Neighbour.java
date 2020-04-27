@@ -10,10 +10,7 @@ public class Neighbour implements Comparable<Neighbour> {
 
     @Override
     public String toString() {
-        return "Neighbour{" +
-                "distance=" + distance +
-                ", label=" + label +
-                '}';
+        return label + " distance=" + distance;
     }
 
     public double getDistance() {

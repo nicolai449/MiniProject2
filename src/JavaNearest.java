@@ -30,7 +30,7 @@ public class JavaNearest {
         });
 
         distances.forEach((observation, neighbour) -> {
-            System.out.println(observation + " \t " + neighbour);
+            System.out.println(observation + " --> " + neighbour);
         });
 
 

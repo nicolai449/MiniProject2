@@ -36,12 +36,7 @@ public class Observation {
 
     @Override
     public String toString() {
-        return "Observation{" +
-                "id=" + id +
-                ", x=" + x +
-                ", y=" + y +
-                ", z=" + z +
-                '}';
+        return "id=" + id;
     }
 
     public double getId() {
