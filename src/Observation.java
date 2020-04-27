@@ -13,6 +13,11 @@ public class Observation {
         this.z = z;
     }
 
+    public double calculateEuclideanDistance(Observation other) {
+        return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2) + Math.pow(this.z - other.z, 2));
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
