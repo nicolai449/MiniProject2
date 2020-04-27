@@ -1,57 +1,43 @@
 import java.util.Objects;
 
 public class Observation {
-    private final double id;
-    private final double x;
-    private final double y;
-    private final double z;
+    private final String date;
+    private final int beaconId;
+    private final int edgenodeId;
+    private final double rssi;
+    private final double realX;
+    private final double realY;
 
-    public Observation(double id, double x, double y, double z) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public Observation(String date, int beaconId, int edgenodeId, double rssi, double realX, double realY) {
+        this.date = date;
+        this.beaconId = beaconId;
+        this.edgenodeId = edgenodeId;
+        this.rssi = rssi;
+        this.realX = realX;
+        this.realY = realY;
     }
-
-    public double calculateEuclideanDistance(Observation other) {
-        return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2) + Math.pow(this.z - other.z, 2));
-    }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Observation that = (Observation) o;
-        return Double.compare(that.id, id) == 0 &&
-                Double.compare(that.x, x) == 0 &&
-                Double.compare(that.y, y) == 0 &&
-                Double.compare(that.z, z) == 0;
+        return beaconId == that.beaconId &&
+                edgenodeId == that.edgenodeId &&
+                Double.compare(that.rssi, rssi) == 0 &&
+                Double.compare(that.realX, realX) == 0 &&
+                Double.compare(that.realY, realY) == 0 &&
+                date.equals(that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, x, y, z);
+        return Objects.hash(date, beaconId, edgenodeId, rssi, realX, realY);
     }
 
-    @Override
-    public String toString() {
-        return "id=" + id;
+    public double calculateEuclideanDistance(Observation other) {
+        return Math.sqrt(Math.pow(this.realX - other.realX, 2) + Math.pow(this.realX - other.realY, 2));
     }
 
-    public double getId() {
-        return id;
-    }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
 }

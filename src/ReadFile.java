@@ -26,7 +26,7 @@ public class ReadFile {
         List<String> contents = new ArrayList<>();
 
         files.forEach(file -> {
-            if (file.toPath().toString().contains("edges.csv")) {
+            if (file.toPath().toString().contains("data.csv")) {
                 try {
                     contents.addAll(Files.readAllLines(file.toPath()));
                 } catch (IOException e) {
