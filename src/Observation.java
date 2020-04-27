@@ -1,47 +1,57 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.Objects;
 
 public class Observation {
-    private final Map<Double, Double> feature;
-    private String label;
+    private final double id;
+    private final double x;
+    private final double y;
+    private final double z;
 
-    public Observation(){
-        feature = new HashMap<>();
+    public Observation(double id, double x, double y, double z) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
-    /**
-     * Adds the feature and value to the map of features
-     *
-     * @param feature
-     * @param value
-     */
-    public void addToFeature(double feature, double value) {
-        this.feature.put(feature, value);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Observation that = (Observation) o;
+        return Double.compare(that.id, id) == 0 &&
+                Double.compare(that.x, x) == 0 &&
+                Double.compare(that.y, y) == 0 &&
+                Double.compare(that.z, z) == 0;
     }
 
-    /**
-     * @param label the label to set
-     */
-    public void setLabel(String label) {
-        this.label = label;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, x, y, z);
     }
 
-    /**
-     * @return the label
-     */
-    public String getLabel() {
-        return label;
+    @Override
+    public String toString() {
+        return "Observation{" +
+                "id=" + id +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
     }
 
-    /**
-     * @return the feature
-     */
-    public Double getFeature(double feature) {
-        return this.feature.get(feature);
+    public double getId() {
+        return id;
     }
 
-    public Set<Double> getFeatures() {
-        return feature.keySet();
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
     }
 }

@@ -1,6 +1,5 @@
-import java.util.Set;
-
 public class Distance {
+    /*
     public double calculateEuclideanDistance(Observation a, Observation b) {
         double squaredDistance = 0;
 
@@ -22,5 +21,5 @@ public class Distance {
         return Math.sqrt(squaredDistance);
     }
 
-    
+     */
 }
