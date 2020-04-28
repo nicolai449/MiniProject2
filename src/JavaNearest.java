@@ -1,16 +1,40 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class JavaNearest {
     public static void main(String[] args) {
-        ReadFile readFile = new ReadFile();
-        List<Observation> observations = readFile.getObservations();
+        ReadFile readFileTest = new ReadFile("lib/experiment1/valid", "data.csv");
+        List<Observation> observations = readFileTest.getObservations();
+        //System.out.println(observations.size());
 
+        observations.forEach(observation -> {
+            observations.forEach(contester -> {
+
+
+                if (observation.getRssi() == contester.getRssi())
+
+
+                    if (observation.getDate().equals(contester.getDate()) && observation.getBeaconId() == contester.getBeaconId()) {
+                        observations.remove(observation);
+
+                    }
+
+
+            });
+        });
+        System.out.println(observations.size());
+
+
+
+        /*
         Map<Observation, Neighbour> distances = new HashMap<>();
 
         //For all observations
         observations.forEach(observation -> {
+
+            //System.out.println(observation.toString());
 
             observations.forEach(observation1 -> {
 
@@ -23,9 +47,7 @@ public class JavaNearest {
                     distances.replace(observation, new Neighbour(observation1, distance));
                 }
 
-
             });
-
 
         });
 
@@ -33,6 +55,42 @@ public class JavaNearest {
             System.out.println(observation + " --> " + neighbour);
         });
 
+         */
+
 
     }
+
+    public Map generateRadiomap() {
+        ReadFile readFileTest = new ReadFile("lib/experiment1/train", "data.csv");
+        List<Observation> observations = readFileTest.getObservations();
+
+        Map<Observation, List<Observation>> radioMap = new HashMap<>();
+
+        observations.forEach(observation -> {
+
+            List<Observation> signalStrengthList = new ArrayList<>();
+
+            observations.forEach(contester -> {
+
+                if (observation.getBeaconId())
+
+                    double signalStrength =
+
+
+            });
+
+
+        });
+
+
+        return observations;
+    }
 }
+
+/*
+1. abc ændres til beaconid
+
+
+
+
+ */
