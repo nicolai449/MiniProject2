@@ -1,19 +1,24 @@
 import java.util.List;
-import java.util.Map;
 
 public class JavaNearest {
     public static void main(String[] args) {
-        ReadFile readFileTest = new ReadFile("lib/experiment1/test", "data.csv");
-        Map<Integer, List<Double>> testObservations = readFileTest.getObservations();
-        ReadFile readFileTrain = new ReadFile("lib/experiment1/train", "data.csv");
-        Map<Integer, List<Double>> trainObservations = readFileTest.getObservations();
+        ReadFile readFileTest = new ReadFile("lib/experiment1/test", "data_wide.csv");
+        List<Observation> testObservations = readFileTest.getObservations();
+        ReadFile readFileTrain = new ReadFile("lib/experiment1/train", "data_wide.csv");
+        List<Observation> trainObservations = readFileTest.getObservations();
 
+
+
+
+        /*
+
+        Map<Integer, Double> closestObservation = new HashMap<>();
 
         for (Map.Entry<Integer, List<Double>> e : testObservations.entrySet()) {
             Integer integer = e.getKey();
             List<Double> doubles = e.getValue();
 
-            double distance = 0.0;
+            double distance = 0;
 
             //Here be dragons, plz refactor
             for (Map.Entry<Integer, List<Double>> entry : trainObservations.entrySet()) {
@@ -44,98 +49,73 @@ public class JavaNearest {
                             }
                         }
                     }
-
-                    System.out.println(Math.sqrt(distance));
                 }
+            }
+            distance = Math.sqrt(distance);
 
+
+            closestObservation.put(integer, distance);
+
+        }
+        System.out.println(closestObservation);
+
+
+         */
+        /*
+
+        Map<Integer, Double> closestObservation = new HashMap<>();
+
+        for (Map.Entry<Integer, List<Double>> e : testObservations.entrySet()) {
+            Integer integer = e.getKey();
+            List<Double> doubles = e.getValue();
+
+            double distance = 0;
+
+            //Here be dragons, plz refactor
+            for (Map.Entry<Integer, List<Double>> entry : trainObservations.entrySet()) {
+
+                for (int i = 0; i < entry.getValue().size(); i++) {
+                    if (entry.getValue().size() == doubles.size()) {
+                        if (i % 3 == 2) {
+                            distance = Math.pow(doubles.get(i) - entry.getValue().get(i), 2);
+                        }
+                    } else if (entry.getValue().size() > doubles.size()) {
+                        if (i > doubles.size()) {
+                            if (i % 3 == 2) {
+                                distance = Math.pow(entry.getValue().get(i), 2);
+                            }
+                        } else {
+                            if (i % 3 == 2) {
+                                distance = Math.pow(doubles.get(i) - entry.getValue().get(i), 2);
+                            }
+                        }
+                    } else if (entry.getValue().size() < doubles.size()) {
+                        if (i < entry.getValue().size()) {
+                            if (i % 3 == 2) {
+                                distance = Math.pow(doubles.get(i), 2);
+                            }
+                        } else {
+                            if (i % 3 == 2) {
+                                distance = Math.pow(doubles.get(i) - entry.getValue().get(i), 2);
+                            }
+                        }
+                    }
+                }
+            }
+            distance = Math.sqrt(distance);
+
+
+            if (closestObservation.containsKey(integer) && closestObservation.get(integer) < distance) {
+                closestObservation.replace(integer, distance);
+            } else if (!closestObservation.containsKey(integer)) {
+                closestObservation.put(integer, distance);
             }
         }
-    }
+        System.out.println(closestObservation);
 
-}
-
-            /*
-
-            testObservations.forEach(contester -> {
-
-                if (observation.getBeaconId() == contester.getBeaconId()){
-
-                    System.out.println(contester.getBeaconId());
-
-                }
-
-            });
-
-             */
-
-
-//System.out.println(radioMap.toString());
-
-
-
-
-        /*
-        Map<Observation, Neighbour> distances = new HashMap<>();
-
-        //For all observations
-        observations.forEach(observation -> {
-
-            //System.out.println(observation.toString());
-
-            observations.forEach(observation1 -> {
-
-                double distance = observation.calculateEuclideanDistance(observation1);
-
-                if (distances.get(observation) == null && !observation.equals(observation1)) {
-                    distances.put(observation, new Neighbour(observation1, distance));
-
-                } else if (distance != 0.0 && distance < distances.get(observation).getDistance()) {
-                    distances.replace(observation, new Neighbour(observation1, distance));
-                }
-
-            });
-
-        });
-
-        distances.forEach((observation, neighbour) -> {
-            System.out.println(observation + " --> " + neighbour);
-        });
 
          */
 
 
-
-
-    /*
-    public Map generateRadiomap() {
-        ReadFile readFileTest = new ReadFile("lib/experiment1/train", "data.csv");
-        List<Observation> observations = readFileTest.getObservations();
-
-        Map<Observation, List<Observation>> radioMap = new HashMap<>();
-
-        observations.forEach(observation -> {
-
-            List<Observation> signalStrengthList = new ArrayList<>();
-
-            observations.forEach(contester -> {
-
-
-
-            });
-
-
-        });
-
-        return new HashMap();
-       // return observations;
     }
-
-     */
-
-/*
-1. abc ændres til beaconid
-
-
-
-
- */
+}

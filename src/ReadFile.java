@@ -1,7 +1,9 @@
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ReadFile {
 
@@ -14,7 +16,6 @@ public class ReadFile {
         this.filePath = new File(path);
         this.files = Arrays.asList(filePath.listFiles());
     }
-
 
     private static boolean isNumeric(String strNum) {
         if (strNum == null) {
@@ -43,30 +44,21 @@ public class ReadFile {
         return contents;
     }
 
-    public Map<Integer, List<Double>> getObservations() {
-        //List<Observation> observations = new ArrayList<>();
-        Map<Integer, List<Double>> observations = new HashMap<>();
+    public List<Observation> getObservations() {
+        List<Observation> observations = new ArrayList<>();
         getContents().forEach(s -> {
             String[] p = s.split(",");
-            if (isNumeric(p[1])) {
+            if (isNumeric(p[2])) {
                 List<Double> doubleholder2 = new ArrayList<>();
-                if (!observations.containsKey(Integer.valueOf(p[1]))) {
-
-                    doubleholder2.addAll(Arrays.asList(Double.valueOf(p[3]), Double.valueOf(p[4]), Double.valueOf(p[5])));
-                    observations.put(Integer.valueOf(p[1]), doubleholder2);
-                    //observations.put(Integer.valueOf(p[1]), Arrays.asList(Double.valueOf(p[3]), Double.valueOf(p[4]), Double.valueOf(p[5])));
-                } else {
-
-                    observations.get(Integer.valueOf(p[1])).add(Double.valueOf(p[3]));
-                    observations.get(Integer.valueOf(p[1])).add(Double.valueOf(p[4]));
-                    observations.get(Integer.valueOf(p[1])).add(Double.valueOf(p[5]));
+                // 4 -> 12
+                for (int i = 4; i < 12; i++) {
+                    doubleholder2.add(Double.valueOf(p[i]));
                 }
-                //String date, int beaconId, int edgenodeId, double rssi, double realX, double realY
-                //observations.add(new Observation(String.valueOf(p[0]), Integer.valueOf(p[1]), Integer.valueOf(p[2]), Double.valueOf(p[3]), Double.valueOf(p[4]), Double.valueOf(p[5])));
-
+                observations.add(new Observation(Integer.valueOf(p[1]), Double.valueOf(p[2]), Double.valueOf(p[3]), doubleholder2));
             }
         });
-
         return observations;
     }
+
+
 }
