@@ -1,30 +1,39 @@
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class JavaNearest {
     public static void main(String[] args) {
-        ReadFile readFileTest = new ReadFile("lib/experiment1/valid", "data.csv");
-        List<Observation> observations = readFileTest.getObservations();
-        //System.out.println(observations.size());
-
-        observations.forEach(observation -> {
-            observations.forEach(contester -> {
-
-
-                if (observation.getRssi() == contester.getRssi())
+        ReadFile readFileTest = new ReadFile("lib/experiment1/test", "data.csv");
+        //List<Observation> testObservations = readFileTest.getObservations();
+        Map<Integer, List<Double>> testObservations = readFileTest.getObservations();
+        //ReadFile readFileTrain = new ReadFile("lib/experiment1/train", "data.csv");
+        //List<Observation> trainObservations = readFileTest.getObservations();
 
 
-                    if (observation.getDate().equals(contester.getDate()) && observation.getBeaconId() == contester.getBeaconId()) {
-                        observations.remove(observation);
+        testObservations.forEach((integer, doubles) -> {
 
-                    }
+            System.out.println(integer + " " + doubles);
 
+
+        });
+
+            /*
+
+            testObservations.forEach(contester -> {
+
+                if (observation.getBeaconId() == contester.getBeaconId()){
+
+                    System.out.println(contester.getBeaconId());
+
+                }
 
             });
-        });
-        System.out.println(observations.size());
+
+             */
+
+
+        //System.out.println(radioMap.toString());
+
 
 
 
@@ -60,6 +69,7 @@ public class JavaNearest {
 
     }
 
+    /*
     public Map generateRadiomap() {
         ReadFile readFileTest = new ReadFile("lib/experiment1/train", "data.csv");
         List<Observation> observations = readFileTest.getObservations();
@@ -72,9 +82,6 @@ public class JavaNearest {
 
             observations.forEach(contester -> {
 
-                if (observation.getBeaconId())
-
-                    double signalStrength =
 
 
             });
@@ -82,9 +89,11 @@ public class JavaNearest {
 
         });
 
-
-        return observations;
+        return new HashMap();
+       // return observations;
     }
+
+     */
 }
 
 /*
