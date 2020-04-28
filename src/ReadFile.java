@@ -54,7 +54,7 @@ public class ReadFile {
                 for (int i = 4; i < 12; i++) {
                     doubleholder2.add(Double.valueOf(p[i]));
                 }
-                observations.add(new Observation(Integer.valueOf(p[1]), Double.valueOf(p[2]), Double.valueOf(p[3]), doubleholder2));
+                observations.add(new Observation(p[0], Integer.valueOf(p[1]), Double.valueOf(p[2]), Double.valueOf(p[3]), doubleholder2));
             }
         });
         return observations;
