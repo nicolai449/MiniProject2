@@ -8,10 +8,9 @@ public class JavaNearest {
         ReadFile readFileTest = new ReadFile("lib/experiment1/test", "data_wide.csv");
         List<Observation> testObservations = readFileTest.getObservations();
         ReadFile readFileTrain = new ReadFile("lib/experiment1/train", "data_wide.csv");
-        List<Observation> trainObservations = readFileTest.getObservations();
+        List<Observation> trainObservations = readFileTrain.getObservations();
 
-        AtomicReference<Double> averageErrorX = new AtomicReference<>((double) 0);
-        AtomicReference<Double> averageErrorY = new AtomicReference<>((double) 0);
+        AtomicReference<Double> distanceError = new AtomicReference<>((double) 0);
 
         testObservations.forEach(testObservation -> {
 
@@ -19,32 +18,15 @@ public class JavaNearest {
 
             trainObservations.forEach(trainObservation -> {
                 double localD = trainObservation.calculateEuclideanDistance(testObservation);
-                if (localD != 0.0) {
-                    distances.put(localD, trainObservation);
-                }
+                distances.put(localD, trainObservation);
             });
+
             Map.Entry<Double, Observation> key = distances.entrySet().iterator().next();
 
-            /*
-            System.out.println();
-            System.out.println();
-            System.out.println(distances.get(key.getKey()).getRealX());
-            System.out.println(distances.get(key.getKey()).getRealY());
-            System.out.println(testObservation.getRealX());
-            System.out.println(testObservation.getRealY());
-            System.out.println();
-            System.out.println();
-
-             */
-
-            averageErrorX.set(averageErrorX.get() + distances.get(key.getKey()).getRealX());
-            averageErrorY.set(averageErrorY.get() + distances.get(key.getKey()).getRealY());
-
+            distanceError.set(distanceError.get() + Math.sqrt(Math.pow(distances.get(key.getKey()).getRealX() - testObservation.getRealX(), 2) + Math.pow(distances.get(key.getKey()).getRealY() - testObservation.getRealY(), 2)));
 
         });
-        System.out.println(averageErrorX.get() / testObservations.size());
-        System.out.println(averageErrorY.get() / testObservations.size());
-
+        System.out.println(distanceError.get() / testObservations.size());
 
     }
 }

@@ -50,9 +50,15 @@ public class ReadFile {
             String[] p = s.split(",");
             if (isNumeric(p[2])) {
                 List<Double> doubleholder2 = new ArrayList<>();
-                // 4 -> 12
-                for (int i = 4; i < 12; i++) {
-                    doubleholder2.add(Double.valueOf(p[i]));
+
+
+                for (int i = 4; i < p.length; i++) {
+                    try {
+                        doubleholder2.add(Double.valueOf(p[i]));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(p[0]);
+                    }
+
                 }
                 observations.add(new Observation(p[0], Integer.valueOf(p[1]), Double.valueOf(p[2]), Double.valueOf(p[3]), doubleholder2));
             }
